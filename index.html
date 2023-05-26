@@ -31,10 +31,25 @@
     <div class="container">
         <input type="text" id="texto" placeholder="Cole seu texto aqui">
         <br>
-        <button onclick="falar(document.getElementById('texto').value)">Falar Texto</button>
+        <button onclick="falar()">Falar Texto</button>
     </div>
 
     <script>
+        // Função para carregar o texto salvo do localStorage
+        function carregarTexto() {
+            const textoSalvo = localStorage.getItem('texto');
+            if (textoSalvo) {
+                document.getElementById('texto').value = textoSalvo;
+            }
+        }
+
+        // Função para salvar o texto no localStorage
+        function salvarTexto() {
+            const texto = document.getElementById('texto').value;
+            localStorage.setItem('texto', texto);
+        }
+
+        // Função para falar o texto
         function fale(texto) {
             let msg = texto;
 
@@ -48,9 +63,15 @@
             window.speechSynthesis.speak(speech);
         }
 
-        function falar(texto) {
+        // Função para falar o texto do campo de entrada
+        function falar() {
+            const texto = document.getElementById('texto').value;
             fale(texto);
+            salvarTexto();
         }
+
+        // Chamar a função para carregar o texto ao carregar a página
+        window.addEventListener('load', carregarTexto);
     </script>
 </body>
 </html>
