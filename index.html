@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Falar Texto</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="texto" placeholder="Cole seu texto aqui">
+        <br>
+        <button onclick="falar(document.getElementById('texto').value)">Falar Texto</button>
+    </div>
+
+    <script>
+        function fale(texto) {
+            let msg = texto;
+
+            let speech = new SpeechSynthesisUtterance();
+            speech.lang = "pt-br";
+            speech.text = msg;
+            speech.volume = 1;
+            speech.rate = 1;
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(speech);
+        }
+
+        function falar(texto) {
+            fale(texto);
+        }
+    </script>
+</body>
+</html>
